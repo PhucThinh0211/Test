@@ -1,0 +1,30 @@
+.FloatingActionButton {
+  position: absolute;
+  top: 80px;
+  border-radius: 42px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  background: #FFF;
+  text-align: center;
+  z-index: 1;
+}
+
+.FloatingActionButton-sm {
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+}
+.FloatingActionButton-md {
+  width: 28px;
+  height: 28px;
+  line-height: 24px;
+}
+.FloatingActionButton-lg {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+}
+.FloatingActionButton-xl {
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+}

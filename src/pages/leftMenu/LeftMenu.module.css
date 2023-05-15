@@ -1,0 +1,7 @@
+
+.LeftMenu {
+  background-color: white;
+  overflow: auto;
+  height: calc(100vh - 90px);
+  padding: 10px;
+}
