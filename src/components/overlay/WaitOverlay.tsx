@@ -1,15 +1,27 @@
-import React, { FC, useEffect } from 'react';
-import { Spin, SpinProps } from 'antd';
-import { useSelectorRoot } from '../../store/store';
+import React, { FC } from "react";
+import { Spin, SpinProps } from "antd";
+import { useSelectorRoot } from "../../store/store";
 
-interface WaitOverlayProps extends SpinProps{
-}
+interface WaitOverlayProps extends SpinProps {}
 
-export const WaitOverlay:FC<WaitOverlayProps> = ({ children, ...rest }) => {
-  const visible = useSelectorRoot(state => state.control.isLoading);
-  return (
-    <Spin spinning={visible} {...rest}>
-      {children}
-    </Spin>
+export const WaitOverlay: FC<WaitOverlayProps> = () => {
+  const visible = useSelectorRoot((state) => state.control.isLoading);
+  return visible ? (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0, 0, 0, 0.1)",
+        pointerEvents: "none",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 999,
+      }}
+    >
+      <Spin tip={"Loading ...."} />
+    </div>
+  ) : (
+    <></>
   );
 };

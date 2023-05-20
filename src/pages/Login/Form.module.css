@@ -1,24 +1,75 @@
-.form {
-  padding: 24px;
-  /* box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
-  background-color: white;
-  border-radius: 6px; */
-  margin: 0px 0px 100px 30px;
-  align-items: center;
-  height: 100%;
+.loginContainer {
+  background-image: url('../../image/loginBg.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: darken;
+  height: 100dvh;
+  width: 100vw;
+  display: flex;
   justify-content: center;
-  /* background-color: red; */
+  align-items: center;
+  position: relative;
 }
-
-.header {
-  margin-bottom: 24px;
+.loginContainer::after {
+  content: ''
 }
-
-.footer {
-  text-align: center;
+.loginHeader {
+  margin-inline: auto;
 }
-.imgLogin {
-  object-fit: cover;
+.title {
+  position: absolute;
+  top: 20px;
+  color: rgba(255, 255, 255, 0.74);
+}
+.loginForm {
+  border-radius: 8px;
+  width: clamp(300px, 90vw, 490px);
+  margin: 0px auto 40px;
+  box-shadow: 0px 4px 10px 0px #0000004D;
+  padding: 30px 33px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+.logoContainer {
   width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.logo {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.rememberAndForgot {
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.button {
+  border-radius: 5px !important;
+  font-weight: 600;
+  background-color: #23a7ff;
+}
+.socialLogin {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.socialLogin img {
+  cursor: pointer;
+}
+.Link {
+  color: #23a7ff;
+  cursor: pointer;
+  font-weight: 600;
+}
+.Link:hover {
+  text-decoration: underline;
+}
+@media only screen and (max-width: 576px) {
+  .loginForm {
+    margin-top: 40px;
+    padding: 15px 10px;
+  }
 }

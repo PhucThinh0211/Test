@@ -34,12 +34,6 @@ export interface UserData {
     profile: any
     forcePasswordChange: boolean
   }
-
-export interface LoginInfo {
-    username: string;
-    password: string;
-    remember: boolean;
-}
 export interface ForgotType {
     email: string;
 }
@@ -67,14 +61,17 @@ export interface ResponseToken {
 }
 
 export interface Token_ResponseToken {
-    accessToken: string;
-    refreshToken: string;
-    tokenType: string;
-    expiryDuration: number;
+    access_token: string;
+    refresh_token: string;
+    token_type: string;
+    expires_in: number;
+    scope?: string
 }
 export interface LoginInfo {
     username: string;
     password: string;
+    captchaId?: string;
+    captcha?: string;
     remember: boolean;
 }
 

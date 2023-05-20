@@ -5,6 +5,7 @@ const SYSTEM_CONSTANTS = {
         FORGOT: 'users',
         PROFILE: 'api/users/1?populate=role',
         ROLE: 'api/users-permissions/roles',
+        CAPTCHA: 'clients/captcha'
     },
 };
 

@@ -9,6 +9,7 @@ import {
     ResponseToken,
     RoleData,
     RootEpic,
+    Token_ResponseToken,
     User,
     UserResponse,
 } from '../../common/define-types';
@@ -60,22 +61,23 @@ const loginSlice = createSlice({
         loginSuccess(
             state,
             action: PayloadAction<{
-                token: ResponseToken;
+                user: any;
+                token: Token_ResponseToken;
                 remember: boolean;
             }>,
         ) {
             if (action.payload.remember) {
-                Utils.token = action.payload.token.jwt;
+                Utils.token = action.payload.token.access_token;
                 Utils.setLocalStorage(Utils.constant.token, action.payload.token);
-                Utils.setLocalStorage(Utils.constant.username, action.payload.token.user.username);
-                Utils.setLocalStorage(Utils.constant.email, action.payload.token.user.email);
-                Utils.setLocalStorage(Utils.constant.user, action.payload.token.user);
+                Utils.setLocalStorage(Utils.constant.username, action.payload.user.username);
+                Utils.setLocalStorage(Utils.constant.email, action.payload.user.email);
+                Utils.setLocalStorage(Utils.constant.user, action.payload.user);
             } else {
                 //Utils.clear();
                 //Utils.setLocalStorage('token', action.payload.token);
-                Utils.token = action.payload.token.jwt;
+                Utils.token = action.payload.token.access_token;
             }
-            state.user = action.payload.token.user;
+            state.user = action.payload.user;
             state.loading = false;
             state.isSuccess = true;
         },
@@ -146,18 +148,24 @@ const login$: RootEpic = (action$) =>
         filter(loginRequest.match),
         switchMap((re) => {
             return IdentityApi.login({
-                identifier: re.payload.username,
-                password: re.payload.password
+                username: re.payload.username,
+                password: re.payload.password,
+                CaptchaId: re.payload.captchaId ?? '',
+                Captcha: re.payload.captcha ?? '',
+                scope: 'offline_access API',
+                grant_type: 'password',
+                client_id: 'DMS'
             }).pipe(
                 mergeMap((res: any) => {
                     if (res && !res?.response?.error) {
-                        const newRes = res as ResponseToken;
-                        const token = newRes.jwt;
+                        const newRes = res as Token_ResponseToken;
+                        const token = newRes.access_token;
                         const userRes: UserResponse = jwt(token);
                         Utils.token = token;
 
                         return [
                             loginSlice.actions.loginSuccess({
+                                user: userRes,
                                 token: newRes,
                                 remember: re.payload.remember,
                             }),
